@@ -356,7 +356,8 @@
 
   function deleteCard(col, id) {
     data[col] = data[col].filter(c => c.id !== id);
-    save(); renderAll();
+    save(); 
+    renderAll();
   }
 
   // Modal

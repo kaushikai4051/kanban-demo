@@ -26,7 +26,7 @@
 
     .board {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       align-items: start;
     }
@@ -59,6 +59,7 @@
     }
     .col-todo    .dot { background: #60a5fa; }
     .col-doing   .dot { background: #f59e0b; }
+    .col-qa      .dot { background: #c084fc; }
     .col-done    .dot { background: #34d399; }
 
     .count {
@@ -242,6 +243,15 @@
     <button class="add-btn" onclick="openModal('doing')">+ Add card</button>
   </div>
 
+  <div class="column col-qa" id="col-qa">
+    <div class="column-header">
+      <div class="column-title"><span class="dot"></span> In QA</div>
+      <span class="count" id="count-qa">0</span>
+    </div>
+    <div class="cards drop-zone" id="cards-qa"></div>
+    <button class="add-btn" onclick="openModal('qa')">+ Add card</button>
+  </div>
+
   <div class="column col-done" id="col-done">
     <div class="column-header">
       <div class="column-title"><span class="dot"></span> Done</div>
@@ -282,8 +292,9 @@
 </div>
 
 <script>
-  const COLS = ['todo', 'doing', 'done'];
-  let data = JSON.parse(localStorage.getItem('kanban') || '{"todo":[],"doing":[],"done":[]}');
+  const COLS = ['todo', 'doing', 'qa', 'done'];
+  let data = JSON.parse(localStorage.getItem('kanban') || '{"todo":[],"doing":[],"qa":[],"done":[]}');
+  if (!data.qa) data.qa = [];
   let targetCol = null;
   let dragId = null;
 
